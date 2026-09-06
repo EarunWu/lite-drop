@@ -1,0 +1,33 @@
+{
+  "name": "lite-drop",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "npm run build && wrangler dev --local --ip 127.0.0.1 --port 8787 --log-level warn --var UPLOAD_AUTH_MODE:password",
+    "dev:assets": "vite build --watch",
+    "types": "wrangler types worker/bindings.d.ts --env-interface CloudflareBindings --include-runtime false --strict-vars false",
+    "build": "vite build",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.worker.json && tsc -p tests/tsconfig.json",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm run test && npm run build && wrangler deploy --dry-run",
+    "deploy": "npm run build && wrangler deploy",
+    "test:browser": "node scripts/browser-smoke.mjs",
+    "test:large": "node scripts/large-file-smoke.mjs"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "1.1.4",
+    "@cloudflare/workers-types": "5.20260905.1",
+    "@playwright/test": "1.63.0",
+    "typescript": "7.0.2",
+    "vite": "8.2.2",
+    "vitest": "4.1.11",
+    "wrangler": "4.129.0"
+  },
+  "dependencies": {
+    "jose": "^6.2.12"
+  }
+}

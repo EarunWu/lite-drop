@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>隐私说明 · Lite Drop</title><link rel="stylesheet" href="/privacy.css"></head>
+<body><main><a href="/">← 返回 Lite Drop</a><h1>隐私说明</h1><p>更新于 2026 年 9 月 6 日</p>
+<p>Lite Drop 是用于临时上传和接收文件的个人工具。Google 登录仅用于验证上传者的身份与邮箱，并检查其是否在站点允许的账号范围内。</p>
+<h2>Google 登录</h2><p>本站申请 openid 和 email 权限，接收 Google 账号标识、邮箱和邮箱验证状态，不申请读取邮件、网盘或联系人。登录流程通过 Google 完成，本站不接收 Google 密码。</p>
+<p>登录成功后，浏览器保存一个安全、HttpOnly 的会话 Cookie，有效期为 1 小时。它包含账号标识和邮箱，服务器每次验证上传权限时检查签名、有效期及邮箱白名单。退出登录会清除浏览器中的会话 Cookie。本站不保存 Google 访问令牌或刷新令牌，也不将 Google 账号数据用于广告、出售或分享给其他人。</p>
+<p>为防止伪造和重放，短期登录请求存放于 Cloudflare Durable Objects，最多保留 10 分钟，完成后立即删除。Google 按其自身隐私政策处理登录过程中的数据。</p>
+<h2>文件与访问保护</h2><p>文件保存于私有 Cloudflare R2，到期或可下载次数用尽后自动清理；进行中的传输结束后再删除。未完成上传最多保留 24 小时。下载者不需要 Google 登录。</p>
+<p>服务使用带密钥摘要处理 IP 地址和接收码索引，以限制错误尝试并管理传输。应用日志不记录密码、接收码、登录凭证或 Google 返回的授权码。Cloudflare 作为托管服务提供商处理为交付和保护服务所需的网络数据。</p>
+<h2>联系</h2><p>如需了解数据处理或提出隐私请求，请联系 <a href="mailto:owner@example.com">owner@example.com</a>。</p></main></body></html>

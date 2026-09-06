@@ -1,0 +1,6 @@
+# 仅供本地开发；部署时用 wrangler secret put 设置独立随机值。
+APP_SECRET="local-development-only-replace-with-a-random-64-character-secret"
+UPLOAD_PASSWORD="change-this-local-password"
+# 本地密码模式：wrangler dev --var UPLOAD_AUTH_MODE:password
+# Google 模式还需配置 wrangler.jsonc 中的客户端 ID、回调和邮箱白名单。
+GOOGLE_CLIENT_SECRET="replace-with-your-google-client-secret"

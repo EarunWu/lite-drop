@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f6f1" />
+    <meta name="description" content="轻轻一投，凭码接收。简单、短暂的文件传递。" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Lite Drop · 轻投</title>
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Lite Drop 首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 5 17-2-6 18-3-9-8-7Z"/><path d="m12 12 9-9"/></svg></span><span>lite<span class="brand-light">drop</span><span class="brand-dot">.</span></span></a>
+      <span class="header-note"><span class="status-dot"></span> 简单传递，轻装离开</span>
+    </header>
+    <main>
+      <div class="intro"><span class="eyebrow">A LITTLE DROP, A SIMPLE CONNECTION</span><h1>文件，轻轻一投<span>。</span></h1><p>传递你想分享的，让其余的随时间消失。</p></div>
+      <section class="transfer-card" aria-label="文件投送">
+        <div class="tab-list" role="tablist" aria-label="选择功能">
+          <button id="download-tab" role="tab" aria-selected="true" aria-controls="download-panel" class="tab active"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4"/></svg>接收文件</button>
+          <button id="upload-tab" role="tab" aria-selected="false" aria-controls="upload-panel" class="tab" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m-5 5 5-5 5 5M4 16v4h16v-4"/></svg>投送文件</button>
+        </div>
+        <div id="loading" class="loading" role="status">正在连接…</div>
+        <div id="config-error" class="notice error" role="alert" hidden></div>
+        <button id="reload-config" class="text-button" hidden>重新连接</button>
+        <div id="download-panel" role="tabpanel" aria-labelledby="download-tab" class="panel" hidden>
+          <div class="panel-heading"><span class="mini-label">RECEIVE A FILE</span><h2>有一份文件，正在等你。</h2><p>输入对方分享的接收码，即可开始下载。</p></div>
+          <form id="download-form">
+            <label for="receive-code">接收码<span>6～12 位数字</span></label>
+            <div class="code-field"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 3-4 18M18 3l-4 18M3 9h18M2 15h18"/></svg><input id="receive-code" type="text" inputmode="numeric" autocomplete="off" minlength="6" maxlength="12" pattern="[0-9]{6,12}" placeholder="输入接收码" required spellcheck="false" aria-describedby="download-hint download-message" /></div>
+            <button id="download-button" class="primary" type="submit"><span>接收文件</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+            <div id="download-message" class="notice" role="status" aria-live="polite" hidden></div>
+            <p id="download-hint" class="field-hint">开始下载即使用 1 次机会，请保持网络连接。</p>
+          </form>
+          <div class="card-foot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4v5c0 5-8 9-8 9s-8-4-8-9V7l8-4Z"/><path d="m8 12 3 3 5-6"/></svg><span>凭码取件 · 到期自动清理</span></div>
+        </div>
+        <div id="upload-panel" role="tabpanel" aria-labelledby="upload-tab" class="panel" hidden>
+          <div class="panel-heading"><span class="mini-label">SEND A FILE</span><h2>给文件一个短暂的停靠。</h2><p>设置接收方式，然后把文件轻轻投出。</p></div>
+          <form id="auth-form" hidden>
+            <div class="auth-intro"><span class="lock-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/></svg></span><p>投送前，先验证上传权限。<small>验证成功后，1 小时内无须重复输入。</small></p></div>
+            <label for="upload-password">上传密码</label><input id="upload-password" type="password" autocomplete="current-password" maxlength="1024" placeholder="输入上传密码" required />
+            <button id="auth-button" class="primary" type="submit"><span>验证并继续</span><span aria-hidden="true">→</span></button>
+            <div id="auth-message" class="notice" role="status" aria-live="polite" hidden></div>
+          </form>
+          <div id="google-auth" hidden>
+            <div class="auth-intro"><span class="lock-icon" aria-hidden="true">G</span><p>使用 Google 账号验证上传权限。<small>仅授权账号可以上传，登录有效期为 1 小时。</small></p></div>
+            <button id="google-button" class="secondary google-button" type="button"><span>使用 Google 账号登录</span></button>
+            <p class="field-hint">仅用于验证身份和邮箱。<a href="/privacy.html" target="_blank" rel="noopener">隐私说明</a></p>
+            <div id="google-message" class="notice" role="status" aria-live="polite" hidden></div>
+          </div>
+          <div id="google-session" class="google-session" hidden><span id="google-email"></span><button id="logout-button" class="text-button" type="button">退出登录</button></div>
+          <form id="upload-form" hidden>
+            <fieldset id="upload-fields">
+              <label for="send-code">设置接收码<span>6～12 位数字</span></label><div class="input-action"><input id="send-code" type="text" inputmode="numeric" autocomplete="off" minlength="6" maxlength="12" pattern="[0-9]{6,12}" required /><button type="button" id="generate-code" class="text-button">随机生成 ↻</button></div>
+              <div class="form-row"><div><label for="ttl">有效期</label><select id="ttl"><option value="3600">1 小时</option><option value="86400">24 小时</option><option value="604800">7 天</option><option value="custom">自定义</option></select></div><div><label for="download-limit">可下载次数</label><div class="unit-input"><input id="download-limit" type="number" min="1" step="1" value="1" required /><span>次</span></div></div></div>
+              <div id="custom-ttl-field" hidden><label for="custom-ttl">自定义有效期<span id="ttl-range"></span></label><div class="unit-input"><input id="custom-ttl" type="number" min="1" step="1" value="60" /><span>分钟</span></div></div>
+              <label id="drop-zone" class="drop-zone" for="file-input"><input id="file-input" type="file" /><span class="file-symbol"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8 4h10l6 6v18H8zM18 4v7h6M16 23V14m-4 4 4-4 4 4"/></svg></span><strong id="file-title">点击选择，或拖入文件</strong><span id="file-detail">单个文件 · 最大 500 MB</span><span id="file-change" hidden>点击更换文件</span></label>
+            </fieldset>
+            <div id="progress-area" class="progress-area" hidden><div><span id="progress-label">正在准备上传</span><span id="progress-percent">0%</span></div><progress id="upload-progress" max="100" value="0"></progress><p id="progress-detail">请保持页面打开</p></div>
+            <div class="upload-actions"><button id="upload-button" class="primary" type="submit"><span>开始投送</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 5 17-2-6 18-3-9-8-7Z"/><path d="m12 12 9-9"/></svg></button><button id="cancel-upload" class="secondary" type="button" hidden>取消</button></div>
+            <div id="upload-message" class="notice" role="status" aria-live="polite" hidden></div>
+            <p class="field-hint">有效期从上传成功后开始计算。</p>
+          </form>
+          <div id="upload-success" class="success-panel" hidden><span class="success-mark" aria-hidden="true">✓</span><h3>文件已投出</h3><p id="success-name"></p><div class="receipt"><span>把这个接收码告诉对方</span><strong id="success-code"></strong><button id="copy-code" class="secondary" type="button">复制接收码</button><div class="receipt-meta"><span id="success-expiry"></span><span id="success-count"></span></div></div><button id="another-upload" class="text-button" type="button">再投送一个文件 →</button></div>
+          <div class="card-foot"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>短暂存放，自然告别</span></div>
+        </div>
+      </section>
+      <div class="benefits" aria-label="工具特点"><span><i aria-hidden="true">↗</i> 最大 500 MB</span><span><i aria-hidden="true">⌁</i> 无需注册</span><span><i aria-hidden="true">◷</i> 自动清理</span></div>
+    </main>
+    <footer><span>LITE DROP <span class="footer-separator">/</span> 轻投</span><a href="/privacy.html">隐私说明</a><span>让文件经过，不必停留。</span></footer>
+    <iframe id="download-frame" name="download-frame" title="文件下载" hidden></iframe>
+  </body>
+</html>

@@ -1,0 +1,2 @@
+:root { color-scheme: light; font-family: system-ui, sans-serif; background: #faf9f6; color: #343933; }
+body { margin: 0; } main { max-width: 720px; margin: 64px auto; padding: 0 24px; line-height: 1.9; } a { color: #466752; } h1 { font-size: 30px; } h2 { margin-top: 32px; font-size: 20px; }

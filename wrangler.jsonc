@@ -1,0 +1,42 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lite-drop-example",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-09-05",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "routes": [],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "r2_buckets": [{ "binding": "FILES", "bucket_name": "lite-drop-example-files" }],
+  "durable_objects": {
+    "bindings": [{ "name": "STATE", "class_name": "DropState" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["DropState"] }],
+  "vars": {
+    "UPLOAD_AUTH_MODE": "password",
+    "GOOGLE_CLIENT_ID": "",
+    "GOOGLE_REDIRECT_URI": "",
+    "GOOGLE_ALLOWED_EMAILS": "",
+    "UPLOAD_PASSWORD_REQUIRED": "true",
+    "DEFAULT_TTL_SECONDS": "86400",
+    "MAX_TTL_SECONDS": "2592000",
+    "DEFAULT_DOWNLOADS": "1",
+    "MAX_DOWNLOADS": "1000",
+    "MAX_STORED_BYTES": "5000000000",
+    "MAX_ACTIVE_FILES": "200",
+    "MAX_UPLOADS_PER_DAY": "50",
+    "MAX_DOWNLOADS_PER_DAY": "1000",
+    "MAX_DOWNLOADS_PER_MONTH": "20000",
+    "MAX_R2_CLASS_A_PER_DAY": "1000",
+    "MAX_R2_CLASS_A_PER_MONTH": "10000",
+    "MAX_R2_CLASS_B_PER_DAY": "2000",
+    "MAX_R2_CLASS_B_PER_MONTH": "50000",
+    "MAX_PART_ATTEMPTS": "4",
+    "MAX_COMPLETE_ATTEMPTS": "4"
+  },
+  "observability": { "enabled": false }
+}
